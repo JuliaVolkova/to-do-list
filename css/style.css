@@ -1,0 +1,111 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #c3baaf;
+    font-family: Lato, Helvesans, sans-serif;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-title {
+    width: 400px;
+    margin: 50px 10px;
+    font-size: 50px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.tasks-to-do {
+    text-transform: uppercase;
+    margin: 15px;
+}
+
+.logo {
+    display: block;
+    align-items: center;
+    width: 300px;
+    height: auto;
+    margin: 10px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.new-item,
+.deadline {
+    margin: 0;
+    font-size: 18px;
+    line-height: 18px;
+    height: 18px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 6px;
+    font-family: Lato, Helvesans, sans-serif;
+    color: #000;
+}
+
+.tasks {
+    list-style: none;
+}
+
+.add,
+.edit,
+.remove,
+.go {
+    width: 100px;
+    margin: 10px;
+    padding: 1px;
+    /*background: #e78644;*/
+    background: #add8e6;
+    border: 1px solid #888;
+    border-radius: 6px;
+    font-family: Lato, Helvesans, sans-serif;
+    font-size: 26px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    outline: none;
+
+}
+
+.edit,
+.remove,
+.go {
+  width: 90px;
+  font-size: 18px;
+    text-transform: uppercase;
+}
+
+.add:hover,
+.add:focus,
+.edit:hover,
+.edit:focus,
+.remove:hover,
+.remove:focus,
+.go:hover,
+.go:focus {
+    background: #4dcbbf;
+}
+
+.hidden {
+  display: none;
+}
+
+.visually-hidden {
+    position: absolute;
+    height: 1px; width: 1px;
+    overflow: hidden;
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+}
