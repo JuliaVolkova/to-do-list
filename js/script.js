@@ -21,14 +21,14 @@ var module = (function () {
         this.template = document.querySelector('#task-template');
 
         /**
-         * @param {Number} id
          * @return {Node} Отрисовывает эелемент на странице
          */
-        Task.prototype.render = function (id) {
+        Task.prototype.render = function () {
             var element = this.template.content.querySelector('.task-add').cloneNode(true);
             var removeButton = element.querySelector('.remove');
-            removeButton.addEventListener('click', function () { list.remove(id) });
-            element.dataset.id = id;
+            var checkbox = element.querySelector('.done');
+            removeButton.addEventListener('click', (function () { list.remove(this) }).bind(this));
+            checkbox.addEventListener('click', (function () { this.done = true; }).bind(this) );
             element.querySelector('.task-text').textContent = this.text;
             element.querySelector('.date').textContent = this.deadline.toDateString();
             return element;
@@ -52,10 +52,11 @@ var module = (function () {
         };
 
         /**
+         * @param {Task} task
          * @return {Array} удаляет элемент
          */
-        List.prototype.remove = function (index) {
-            this.tasks.splice(index, 1);
+        List.prototype.remove = function (task) {
+            this.tasks.splice(this.tasks.indexOf(task), 1);
             this.render();
         };
 
@@ -63,7 +64,6 @@ var module = (function () {
          * @return {Node} позволяет редактировать текст
          */
         List.prototype.edit = function () {
-
             // TODO 20.10.17 implement
         };
 
@@ -71,7 +71,7 @@ var module = (function () {
          * @return {Array} возвращает массив элементов заданий, отфильтрованных по дате
          */
         List.prototype.filter = function () {
-            // TODO 20.10.17 implement
+
         };
 
         List.prototype.render = function () {
@@ -85,7 +85,7 @@ var module = (function () {
             if (oldChild) {
                 page.removeChild(oldChild);
             }
-            page.appendChild(element);
+                page.appendChild(element);
         }
     }
 
