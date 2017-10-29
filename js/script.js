@@ -5,8 +5,8 @@ var module = (function () {
     var addButton = document.querySelector('.add');
     var taskInput = document.querySelector('.new-item');
     var deadlineDate = document.querySelector('.deadline');
-    var removeButton = document.querySelector('.remove');
     var page;
+    var list = new List([]);
 
     /**
      * @param {String} text
@@ -21,10 +21,14 @@ var module = (function () {
         this.template = document.querySelector('#task-template');
 
         /**
+         * @param {Number} id
          * @return {Node} Отрисовывает эелемент на странице
          */
-        Task.prototype.render = function () {
-            var element = this.template.content.cloneNode(true);
+        Task.prototype.render = function (id) {
+            var element = this.template.content.querySelector('.task-add').cloneNode(true);
+            var removeButton = element.querySelector('.remove');
+            removeButton.addEventListener('click', function () { list.remove(id) });
+            element.dataset.id = id;
             element.querySelector('.task-text').textContent = this.text;
             element.querySelector('.date').textContent = this.deadline.toDateString();
             return element;
@@ -50,8 +54,9 @@ var module = (function () {
         /**
          * @return {Array} удаляет элемент
          */
-        List.prototype.remove = function (item) {
-            this.tasks.splice(this.tasks.indexOf(item), 1);
+        List.prototype.remove = function (index) {
+            this.tasks.splice(index, 1);
+            this.render();
         };
 
         /**
@@ -72,8 +77,8 @@ var module = (function () {
         List.prototype.render = function () {
             var element = this.template.content.querySelector('.tasks').cloneNode(true);
             var fragment = document.createDocumentFragment();
-            tasks.forEach(function (task) {
-                fragment.appendChild(task.render())
+            tasks.forEach(function (task, index) {
+                fragment.appendChild(task.render(index))
             });
             element.appendChild(fragment);
             var oldChild = page.querySelector('.tasks');
@@ -84,14 +89,8 @@ var module = (function () {
         }
     }
 
-    var list = new List([]);
-
     function addNewTask() {
         list.add(new Task(taskInput.value, new Date(deadlineDate.value), false));
-    }
-
-    function removeTask() {
-
     }
 
     return {
@@ -99,11 +98,9 @@ var module = (function () {
          * @param {HTMLElement} container
          */
         init: function (container) {
-            // removeButton.addEventListener('click', removeTask);
             addButton.addEventListener('click', addNewTask);
             page = container;
             list.render();
-
         }
     }
 })();
