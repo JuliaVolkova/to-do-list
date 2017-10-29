@@ -27,8 +27,12 @@ var module = (function () {
             var element = this.template.content.querySelector('.task-add').cloneNode(true);
             var removeButton = element.querySelector('.remove');
             var checkbox = element.querySelector('.done');
-            removeButton.addEventListener('click', (function () { list.remove(this) }).bind(this));
-            checkbox.addEventListener('click', (function () { this.done = true; }).bind(this) );
+            removeButton.addEventListener('click', (function () {
+                list.remove(this);
+            }).bind(this));
+            checkbox.addEventListener('click', (function () {
+                list.changeStatus(this);
+            }).bind(this));
             element.querySelector('.task-text').textContent = this.text;
             element.querySelector('.date').textContent = this.deadline.toDateString();
             return element;
@@ -42,6 +46,9 @@ var module = (function () {
     function List(tasks) {
         this.tasks = tasks;
         this.template = document.querySelector('#list-template');
+        this.currentFilter = function (task) {
+            return !task.done;
+        };
 
         /**
          * @return {Array} возвращает массив элементов с текстами заданий
@@ -60,6 +67,11 @@ var module = (function () {
             this.render();
         };
 
+        List.prototype.changeStatus = function (task) {
+            task.done = !task.done;
+            this.render();
+        };
+
         /**
          * @return {Node} позволяет редактировать текст
          */
@@ -67,25 +79,20 @@ var module = (function () {
             // TODO 20.10.17 implement
         };
 
-        /**
-         * @return {Array} возвращает массив элементов заданий, отфильтрованных по дате
-         */
-        List.prototype.filter = function () {
-
-        };
-
         List.prototype.render = function () {
             var element = this.template.content.querySelector('.tasks').cloneNode(true);
             var fragment = document.createDocumentFragment();
-            tasks.forEach(function (task, index) {
-                fragment.appendChild(task.render(index))
-            });
+            this.tasks
+                .filter(this.currentFilter)
+                .forEach(function (task) {
+                    fragment.appendChild(task.render())
+                });
             element.appendChild(fragment);
             var oldChild = page.querySelector('.tasks');
             if (oldChild) {
                 page.removeChild(oldChild);
             }
-                page.appendChild(element);
+            page.appendChild(element);
         }
     }
 
