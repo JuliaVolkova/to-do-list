@@ -7,60 +7,59 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="wrapper">
-        <h1 class="main-title">my to-do list</h1>
-        <img src="img/cat-meow.jpg" alt="grumpy cat" class="logo" width="300" height="auto">
-    </div>
+<div class="wrapper">
+    <h1 class="main-title">my to-do list</h1>
+    <img src="img/cat-meow.jpg" alt="grumpy cat" class="logo" width="300" height="auto">
+</div>
 
-    <div class="container">
-        <h2 class="tasks-to-do">what to do?  add new task</h2>
-            <p class="new-task">
-                <label for="item"></label>
-                    <input placeholder="do something great!" class="new-item" id="item" autofocus>
-                <label for="deadline">Till:</label>
-                    <input type="date" class="deadline" id="deadline">
-                <button type="button" class="add">Add</button>
-            </p>
-    </div>
+<div class="container">
+    <h2 class="tasks-to-do">what to do? add new task</h2>
+    <p class="new-task">
+        <label for="item"></label>
+        <input placeholder="do something great!" class="new-item" id="item" autofocus>
+        <label for="deadline">Till:</label>
+        <input type="date" class="deadline" id="deadline">
+        <button type="button" class="add">Add</button>
+    </p>
 
-    <div class="wrapper-center">
-        <div class="container">
-            <form>
-                <label for="today">today</label>
-                <input type="radio" id="today" name="type" value="today">
+    <form>
+        <label for="today">today</label>
+        <input type="radio" id="today" name="type" value="today">
 
-                <label for="tomorrow">tomorrow</label>
-                <input type="radio" id="tomorrow" name="type" value="tomorrow">
+        <label for="tomorrow">tomorrow</label>
+        <input type="radio" id="tomorrow" name="type" value="tomorrow">
 
-                <label for="next-week">next-week</label>
-                <input type="radio" id="next-week" name="type" value="next-week">
+        <label for="next-week">next-week</label>
+        <input type="radio" id="next-week" name="type" value="next-week">
 
-                <label for="completed">completed</label>
-                <input type="radio" id="completed" name="type" value="completed">
+        <label for="completed">completed</label>
+        <input type="radio" id="completed" name="type" value="completed">
 
-                <button class="go">go!</button>
-            </form>
+        <button class="go">go!</button>
+    </form>
 
-            <h2 class="tasks-to-do">task to do</h2>
-            <ul class="tasks"></ul>
-        </div>
-    </div>
+    <h2 class="tasks-to-do">task to do</h2>
+</div>
 
-    <template id="task-template">
-        <li class="task-add">
-            <p class="task">
-              <label for="done" class="visually-hidden">Task done</label>
-              <input type="checkbox" class="done" id="done">
-              <span class="task-text"></span>
-                <time datetime="" class="date"></time>
-              <input class="visually-hidden">
-              <button type="button" class="edit">Edit</button>
-              <button type="button" class="remove">Remove</button>
-            </p>
-        </li>
-    </template>
+<template id="task-template">
+    <li class="task-add">
+        <p class="task">
+            <label for="done" class="visually-hidden">Task done</label>
+            <input type="checkbox" class="done" id="done">
+            <span class="task-text"></span>
+            <time datetime="" class="date"></time>
+            <input class="visually-hidden">
+            <button type="button" class="edit">Edit</button>
+            <button type="button" class="remove">Remove</button>
+        </p>
+    </li>
+</template>
 
-    <script src="js/script.js"></script>
+<template id="list-template">
+    <ul class="tasks"></ul>
+</template>
+
+<script src="js/script.js"></script>
 
 </body>
 </html>
