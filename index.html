@@ -22,23 +22,29 @@
         <button type="button" class="add">Add</button>
     </p>
 
-    <form>
+    <form class="filters">
         <label for="today">today</label>
         <input type="radio" id="today" name="type" value="today">
 
         <label for="tomorrow">tomorrow</label>
         <input type="radio" id="tomorrow" name="type" value="tomorrow">
 
-        <label for="next-week">next-week</label>
+        <label for="next-week">next week</label>
         <input type="radio" id="next-week" name="type" value="next-week">
 
         <label for="completed">completed</label>
         <input type="radio" id="completed" name="type" value="completed">
 
-        <button class="go">go!</button>
+        <button type="button" class="go">go!</button>
     </form>
 
     <h2 class="tasks-to-do">task to do</h2>
+</div>
+
+<div class="popup hidden">
+    <p class="popup-text">you <br/> are <br/> gorgeous!</p>
+    <img src="img/freddy-mercury.png" alt="freddy mercury" width="380" height="380" class="popup-img">
+    <button type="button" class="close">close</button>
 </div>
 
 <template id="task-template">
