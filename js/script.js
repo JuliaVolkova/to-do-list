@@ -5,6 +5,7 @@ var module = (function () {
     var addButton = document.querySelector('.add');
     var taskInput = document.querySelector('.new-item');
     var deadlineDate = document.querySelector('.deadline');
+    var popup = document.querySelector('.hidden');
     var page;
     var list = new List([]);
 
@@ -27,12 +28,17 @@ var module = (function () {
             var element = this.template.content.querySelector('.task-add').cloneNode(true);
             var removeButton = element.querySelector('.remove');
             var checkbox = element.querySelector('.done');
+
             removeButton.addEventListener('click', (function () {
                 list.remove(this);
             }).bind(this));
             checkbox.addEventListener('click', (function () {
                 list.changeStatus(this);
+                popup.classList.remove('hidden');
+                var closeButton = document.querySelector('.close');
+                closeButton.addEventListener('click', function () { popup.classList.add('hidden') });
             }).bind(this));
+
             element.querySelector('.task-text').textContent = this.text;
             element.querySelector('.date').textContent = this.deadline.toDateString();
             return element;
@@ -49,6 +55,27 @@ var module = (function () {
         this.currentFilter = function (task) {
             return !task.done;
         };
+
+        this.filters = new Map();
+        this.filters.set(document.querySelector('#today'), function (task) {
+            return task.deadline.toDateString() === new Date().toDateString();
+        });
+        this.filters.set(document.querySelector('#tomorrow'), function (task) {
+            var tomorrow = new Date(task.deadline.getFullYear(), task.deadline.getMonth(), task.deadline.getDate() + 1);
+            console.log(tomorrow);
+            return task.deadline.toDateString() === tomorrow.toDateString();
+        });
+        this.filters.set(document.querySelector('#next-week'), function (task) {
+            return false;
+        });
+        this.filters.set(document.querySelector('#completed'), function (task) {
+            return task.done === true;
+        });
+
+        document.querySelector('.go').addEventListener('click', function () {
+            this.currentFilter = this.filters.get(document.querySelector('.filters input:checked'));
+            this.render();
+        }.bind(this));
 
         /**
          * @return {Array} возвращает массив элементов с текстами заданий
@@ -67,6 +94,9 @@ var module = (function () {
             this.render();
         };
 
+        /**
+         * @param {Task} task
+         */
         List.prototype.changeStatus = function (task) {
             task.done = !task.done;
             this.render();
@@ -105,8 +135,8 @@ var module = (function () {
          * @param {HTMLElement} container
          */
         init: function (container) {
-            addButton.addEventListener('click', addNewTask);
             page = container;
+            addButton.addEventListener('click', addNewTask);
             list.render();
         }
     }
