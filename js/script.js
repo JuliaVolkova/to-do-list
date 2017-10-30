@@ -32,6 +32,7 @@ var module = (function () {
             removeButton.addEventListener('click', (function () {
                 list.remove(this);
             }).bind(this));
+
             checkbox.addEventListener('click', (function () {
                 list.changeStatus(this);
                 popup.classList.remove('hidden');
@@ -128,6 +129,8 @@ var module = (function () {
 
     function addNewTask() {
         list.add(new Task(taskInput.value, new Date(deadlineDate.value), false));
+        taskInput.value = '';
+        deadlineDate.value = '';
     }
 
     return {
