@@ -62,11 +62,11 @@ body {
 .add,
 .edit,
 .remove,
-.go {
+.go,
+.close {
     width: 100px;
     margin: 10px;
     padding: 1px;
-    /*background: #e78644;*/
     background: #add8e6;
     border: 1px solid #888;
     border-radius: 6px;
@@ -76,7 +76,6 @@ body {
     vertical-align: middle;
     cursor: pointer;
     outline: none;
-
 }
 
 .edit,
@@ -120,7 +119,7 @@ body {
 .popup-img {
     position: absolute;
     left: 380px;
-    top: 5px;
+    top: 10px;
     display: block;
     width: 450px;
     height: 450px;
